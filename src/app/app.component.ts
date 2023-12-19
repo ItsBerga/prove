@@ -9,6 +9,7 @@ import { UpperCasePipe } from '@angular/common';
 import { ServizioProvaService } from './servizi/servizio-prova.service';
 import { ContactComponent } from './componenti/contact/contact.component';
 import { HomeComponent } from './componenti/home/home.component';
+import { Observable, interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -23,13 +24,19 @@ import { HomeComponent } from './componenti/home/home.component';
             ContactComponent,
             HomeComponent,
             RouterLink,
+
           ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
   title = 'prove'; 
-  constructor(){}
+  constructor(private servizio: ServizioProvaService){}
+
+  ngOnInit(): void {
+  
+  }
+  
 
 }

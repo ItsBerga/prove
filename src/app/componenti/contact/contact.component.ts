@@ -3,6 +3,7 @@ import { ServizioProvaService } from '../../servizi/servizio-prova.service';
 import { NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { ContattoComponent } from '../contatto/contatto.component';
+import { FirebaseService } from '../../servizi/firebase.service';
 
 @Component({
   selector: 'app-contact',
@@ -18,9 +19,19 @@ import { ContattoComponent } from '../contatto/contatto.component';
 })
 export class ContactComponent implements OnInit{
   persone: any
-  constructor(private servizioProva: ServizioProvaService, private route: ActivatedRoute){ }
+  constructor(private firebase: FirebaseService){ }
 
   ngOnInit(): void {
-    this.persone = this.servizioProva.getPersone();
+    this.firebase.getPersone("https://prova-c6e07-default-rtdb.europe-west1.firebasedatabase.app/persone.json")
+    
+    .subscribe((data : any) =>{
+      console.log(data)
+      this.persone = Object.keys(data).map((key)=>{
+        data[key]["id"]= key
+        return data[key]
+      })
+      console.log(this.persone)
+    })
+    
   }
 }

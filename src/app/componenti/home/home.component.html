@@ -1,1 +1,42 @@
-<p>home works!</p>
+<form [formGroup]="homeform" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" />
+    </mat-form-field>
+    <p *ngIf="!homeform.get('nome').valid && homeform.get('nome').touched">Inserisci un nome</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Select</mat-label>
+      <mat-select formControlName="colore">
+        <mat-option value="rosso">Rosso</mat-option>
+        <mat-option value="blu">Blu</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!homeform.valid"
+    >
+      Invia
+    </button>
+  </form>
+
+  <button
+      mat-raised-button
+      color="primary"
+      (click)="onDeletePersona()"
+    >
+      elimina utente
+    </button>
+    <button
+    mat-raised-button
+    color="primary"
+    (click)="onPatchPersona()"
+  >
+    Modifica utente
+  </button>
